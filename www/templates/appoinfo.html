@@ -1,0 +1,197 @@
+<ion-view view-title="Chi tiết cuộc hẹn">
+        <ion-content scroll="false">
+            <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
+                
+                <ion-slide class="slide" dynamic-height ion-slide-tab-label="Appo Info">
+                    <ion-scroll>
+                    <div class="slide-box box">
+                        <div class="im-wrapper">
+                        <div style="margin-top:30px;">
+                            <h3>Chi tiết cuộc hẹn</h3>
+                           <div class="row">
+                              <div class="col text-left"><strong>Tên khách hàng :</strong></div>
+                              <div class="col text-left">{{customer.name}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-left"><strong>Ngày hẹn :</strong></div>
+                              <div class="col text-left">{{customer.appo_dt}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-left"><strong>Mục đích cuộc hẹn :</strong></div>
+                              <div class="col text-left">{{customer.purpose}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-left"><strong>Số điện thoại :</strong></div>
+                              <div class="col text-left">{{customer.phone}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-left"><strong>Địa chỉ :</strong></div>
+                              <div class="col text-left">{{customer.address}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-left"><strong>Điện thoại viên :</strong></div>
+                              <div class="col text-left">{{customer.tsr}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-left"><strong>Trưởng nhóm :</strong></div>
+                              <div class="col text-left">{{customer.tl}}</div>
+                            </div> 
+                            <div class="row">
+                              <div class="col text-left"><strong>TSR ghi chú :</strong></div>
+                              <div class="col text-left">{{customer.note}}</div>
+                            </div>
+                        </div>
+                        <br/>
+                        <button class="button button-full" ng-click="openModal()">Đặt lại lịch hẹn </button>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                    </ion-scroll>
+                </ion-slide>
+                
+                <ion-slide class="slide" dynamic-height ion-slide-tab-label="DSR">
+                    <ion-scroll>
+                        <div class="slide-box box">
+                        <div class="im-wrapper"> 
+                            <form ng-submit="update_dsr()" name="myForm" novalidate>
+                            <div class="list">
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Vị trí </span>
+                                    <input type="text" name="location" ng-model="customer.location" placeholder="Vị trí" required>
+                                </label>
+                                <div class="item item-icon-left" ion-datetime-picker seconds ng-model="customer.visit_dt">
+                                    <i class="icon ion-ios-calendar-outline positive"></i>
+                                    Ngày hẹn gặp :<h3>{{customer.visit_dt | date: "yyyy-MM-dd h:mm:ss"}}</h3>
+                                </div>
+                                <label class="item item-input item-select">
+                                    <div class="input-label">
+                                      Trạng thái :
+                                    </div>
+                                    <select name="disposition" ng-model="customer.disposition" required>
+                                        <option value="" disabled selected>Select Disposition</option>
+                                        <option>Appointment-FPC ~ Confirm Visit</option>
+                                        <option>Met - Collected ~ Appointment Rescheduled (mention the date if provided)</option>
+                                        <option>Met - Collected ~ Docs/Money Collected in Full</option>
+                                        <option>Met - Collected ~ Docs/Money Pending</option>
+                                        <option>Met - Collected ~ Submit to QA</option>
+                                        <option>Met - Refuse ~ Dislike Product Proposition/Features</option>
+                                        <option>Met - Refuse ~ High Fee</option>
+                                        <option>Met - Refuse ~ Not Eligible (mentioned the reason)</option>
+                                        <option>Met - Refuse ~ Others(mentioned the reason)</option>
+                                        <option>Not Met ~ Address Not Found</option>
+                                        <option>Not Met ~ Does Not Agree To Meet/ Cancelled</option>
+                                        <option>Not Met ~ Email Or Fax Instead Of Meeting</option>
+                                        <option>Not Met ~ Need To Reschedule (mentioned the date if given)</option>
+                                        <option>Not Met ~ Other (mention the specific reason)</option>
+                                        <option>Pending ~ Pending</option>
+                                    </select>
+                                </label>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Mô tả </span>
+                                    <input type="text" ng-model="customer.description" placeholder="Mô tả">
+                                </label>
+                                <div class="item item-icon-left" ion-datetime-picker seconds ng-model="customer.next_action_dt">
+                                    <i class="icon ion-ios-calendar-outline positive"></i>
+                                    Ngày hẹn gặp tiếp theo :<h3>{{customer.next_action_dt | date: "yyyy-MM-dd h:mm:ss"}}</h3>
+                                </div>
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">Hành động tiếp theo </span>
+                                    <input type="text" ng-model="customer.next_action" placeholder="Hành động tiếp theo">
+                                </label>
+                                <br />
+                                <br />
+                                <div class="validationalert">
+                                    <p ng-show="myForm.location.$error.required">* Please fill the Location</p>
+                                    <p ng-show="myForm.disposition.$error.required">* Please select Disposition</p>
+                                </div>
+                                <button class="button button-small button-royal" type="submit" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-disabled="myForm.$invalid" >
+                                Cập nhật
+                                </button>
+                            </div>
+                            </form>
+                            <br/>
+                            <br/>
+                        </div>
+                        </div>
+                    </ion-scroll>
+                </ion-slide>
+                
+                
+                <ion-slide ion-slide-tab-label="Upload">
+                    <div class="im-wrapper"> 
+                        <div class="list">
+                            <div style="margin: 0 auto; margin-top:150px; text-align: center;">
+                                <div>
+                                    <button class="button button-positive icon-left ion-camera" ng-click="loadImage()">Chụp hình </button>
+                                </div>
+                                <br/>
+                                <div>
+                                    <button class="button button-calm icon-left ion-upload" ng-click="uploadImage()" ng-disabled="image === null">Tải lên </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </ion-slide>
+                
+                <ion-slide ion-slide-tab-label="DOC">
+                    <div class="im-wrapper"> 
+                        <div class="list">
+                        <form ng-submit="update_docs()">
+                            <ion-checkbox ng-model="customer.id_proof" ng-true-value="'1'" ng-false-value="'0'">Chứng minh nhân dân
+                            </ion-checkbox>
+                            <ion-checkbox ng-model="customer.address_proof" ng-true-value="'1'" ng-false-value="'0'">chứng minh thu nhập
+                            </ion-checkbox>
+                            <ion-checkbox ng-model="customer.income_proof" ng-true-value="'1'" ng-false-value="'0'">Sao kê lương 
+                            </ion-checkbox>
+                            <br />
+                            <br />
+                            <button class="button button-small button-royal" type="submit"
+                                        data-ink-color="#9DEAFF" data-ink-opacity="1" >
+                                        Cập nhật 
+                            </button>
+                        </form>
+                        </div>
+                    </div>
+                </ion-slide>
+                
+            </ion-slide-box>
+            
+            <script id="my-modal.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar>
+                    <h1 class="title">Đặt lại ngày hẹn </h1>
+                </ion-header-bar>
+                <ion-content >
+                    <div class="im-wrapper" style="padding-top:30%;"> 
+                        <div class="list">
+                            <div style="text-align:center;">
+                            <form ng-submit="update_appodt()" >
+                                <div class="item item-icon-left" ion-datetime-picker seconds ng-model="customer.appo_dt">
+                                    <i class="icon ion-ios-calendar-outline positive"></i>
+                                    Ngày hẹn gặp :<h3>{{customer.appo_dt | date: "yyyy-MM-dd h:mm:ss"}}</h3>
+                                </div>
+                                <br />
+                                <div style="text-align:center;">
+                                <button class="button button-small button-positive" type="submit" data-ink-color="#9DEAFF" data-ink-opacity="1" >
+                                    Cập nhật 
+                                </button>
+                                </div>
+                            </form>
+                            </div>
+                            <br />
+                            <div style="text-align:center;">
+                                <button class="button button-small button-assertive" data-ink-color="#9DEAFF" ng-click="hideModal()" data-ink-opacity="1" >
+                                Hủy
+                                </button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+            
+        </ion-content>
+</ion-view>

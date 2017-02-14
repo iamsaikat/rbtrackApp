@@ -1,0 +1,17 @@
+<ion-view view-title="Cuộc hẹn mới">
+<ion-content>
+    <div class="im-wrapper"> 
+       <ion-list class="animate-ripple">
+            <ion-item nav-clear menu-close class="item-icon-right item-avatar" ng-repeat="customer in newappodata" ng-click="appoinfo(customer.id)">
+                <img src="img/material4.jpg">
+                <h2>{{customer.name}}</h2>
+                    <p> 
+                    <span>Ngày : </span>{{customer.appo_dt}}<br/>
+                    <span>Địa chỉ : </span>{{customer.address}}<br/> 
+                    <span>Mục đích cuộc hẹn : </span>{{customer.purpose}} <br/>
+                    <span>Trạng thái cuộc hẹn : </span>{{customer.disposition}} </p>
+                <i class="icon ion-chatbubble muted"></i>
+            </ion-item>
+        </ion-list> 
+    </div>
+</ion-content>

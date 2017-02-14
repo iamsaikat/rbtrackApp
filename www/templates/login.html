@@ -1,0 +1,32 @@
+<ion-view cache-view="false">
+<ion-content>
+    <!--<div class="bar bar-subheader bar-stable static text-center">
+            <strong class="title">Login</strong>
+    </div>-->
+    <div class="row row-center" style="margin-top:50px;">
+        <div class="col text-center" >
+            <img alt="Logo" height="70" src="img/avatar.png" >
+        </div>
+      </div>
+    <div class="im-wrapper"> 
+        <div class="list">
+            <br />
+            <form ng-submit="login()" >
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Tên tài khoản</span>
+                <input type="text" ng-model="data.username" placeholder="Tên tài khoản">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Mật khẩu</span>
+                <input type="password" ng-model="data.password" placeholder="Mật khẩu">
+            </label>
+            <br />
+            <br />
+            <button class="button button-block button-calm" data-ink-color="#9DEAFF" data-ink-opacity="1" >
+                    Đăng nhập
+            </button>
+            </form>
+        </div>
+    </div>
+</ion-content>
+</ion-view>
